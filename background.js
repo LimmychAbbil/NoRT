@@ -3,14 +3,13 @@ chrome.runtime.onInstalled.addListener(function() {
   });
   
  chrome.tabs.onUpdated.addListener(function() {
-    if (true) {
-        chrome.tabs.getSelected(null,function(tab) {
-        var tablink = tab.url;
+    chrome.tabs.getSelected(null,function(tab) {
+    var tablink = tab.url;
 
-        var url = new URL(tablink);
-        if (url.hostname == "twitter.com") {
-            window.alert("I am on twitter");
-        }
-});
+    var url = new URL(tablink);
+    if (url.hostname === "twitter.com") {
+        var gList = document.getElementsByTagName("g");
+        window.alert(gList.length);
     }
+});
  });
