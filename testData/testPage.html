@@ -1,15 +1,15 @@
 <html>
     <head>
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script> 
-        <script>
-             $(window).scroll(function() {   
-   if($(window).scrollTop() + $(window).height() > $(document).height() - 10) {
-       alert("bottom!");
-   }
-});
-        </script>
+        <title>Just a test page </title>
     </head>
     <body>
+        <script>
+             window.onscroll = function(ev) {
+                if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 50) {
+                    alert("you're at the bottom of the page");
+                }
+            };
+        </script>
         <div class="wrapper">
             <hr>
             <div class="innerContent2">Content2</div>
