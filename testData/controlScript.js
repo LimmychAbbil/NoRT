@@ -21,3 +21,23 @@ function addRandomNumberOfBlocks() {
         }
     }
 }
+
+function addObserver() {
+    console.log("Adding observer");
+    MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
+    var observer = new MutationObserver(function(mutations, observer) {
+        hideRTs("innerContent1"); //TODO detect className
+    });
+    
+    observer.observe(document, {
+            subtree:true,
+            attributes:true,
+            childList: true,
+            characterData: true
+            //...
+    });
+}
+
+function hideRTs(rtClassName) {
+    console.log("Time to hide all divs contains " + rtClassName); //TODO implement
+}
