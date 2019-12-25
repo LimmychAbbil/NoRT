@@ -26,7 +26,7 @@ function addObserver() {
     console.log("Adding observer");
     MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     var observer = new MutationObserver(function(mutations, observer) {
-        hideRTs("innerContent1"); //TODO detect className
+        //hideRTs("innerContent1"); //TODO detect className
     });
     
     observer.observe(document, {
@@ -39,5 +39,11 @@ function addObserver() {
 }
 
 function hideRTs(rtClassName) {
-    console.log("Time to hide all divs contains " + rtClassName); //TODO implement
+    var allElementsWithRtClassName = document.getElementsByClassName(rtClassName);
+    
+    console.log("Elements with " + rtClassName + " " + allElementsWithRtClassName.length);
+    
+     for (const elementToHide of allElementsWithRtClassName) {
+        elementToHide.parentElement.setAttribute("style", "display:none");
+    }
 }
