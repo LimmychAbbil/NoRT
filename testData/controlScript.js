@@ -22,16 +22,22 @@ function addRandomNumberOfBlocks() {
     }
 }
 
+var isBindingActive = false;
+
 function addObserver() {
     console.log("Adding observer");
     MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     var observer = new MutationObserver(function(mutations, observer) {
-        //hideRTs("innerContent1"); //TODO detect className
+            if (!isBindingActive) {
+                isBindingActive = true;
+                hideRTs("innerContent1"); //TODO detect className
+                isBindingActive = false;
+            }
     });
     
     observer.observe(document, {
             subtree:true,
-            attributes:true,
+            attributes:false,
             childList: true,
             characterData: true
             //...
