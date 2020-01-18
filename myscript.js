@@ -10,13 +10,18 @@
     addObserver();
 
 
+    var isClassNameFound = false;
+    var rtClassName = null;
 function addObserver() {
     console.log("Adding observer");
     MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     var observer = new MutationObserver(function(mutations, observer) {
+            if (!isClassNameFound) {
+                rtClassName = findRTIconClassName();
+            }
             if (!isBindingActive) {
                 isBindingActive = true;
-                hideRTs("r-111h2gw r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1xzupcd"); //TODO detect className
+                hideRTs(rtClassName); //TODO detect className
                 isBindingActive = false;
             }
     });
@@ -39,4 +44,9 @@ function hideRTs(rtClassName) {
      for (const elementToHide of allElementsWithRtClassName) {
         elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
     }
+}
+
+function findRTIconClassName() {
+    isClassNameFound = true;
+    return "r-111h2gw r-4qtqp9 r-yyyyoo r-1xvli5t r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1xzupcd";
 }
