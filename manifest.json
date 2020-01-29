@@ -1,6 +1,6 @@
   {
     "name": "NoReTweets",
-    "version": "0.00.0004",
+    "version": "0.01.0001",
     //"default_locale": "en",
     "description": "Read only own person's thoughts",
 
@@ -15,7 +15,6 @@
     },
 
     "browser_action": {
-      //"default_icon": "icons/icon.png",
       "default_popup": "popup.html"
     },
     //"background": {

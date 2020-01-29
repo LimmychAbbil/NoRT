@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html style=''>
 <head>
-<script src='popup.js'></script>
+    <link rel="stylesheet" type="text/css" href="controls/styles.css">
 </head>
-<body style="width:400px;">
-<div id='message'>Injecting Script....</div>
+<div style="width:400px; display:inline">
+    Retweets:
+    <label class="switch">
+      <input type="checkbox" id="showRTs" checked>
+      <span class="slider round"></span>
+    </label>
+    <script src="popup.js"></script>
+</div>
 </body>
 </html>
