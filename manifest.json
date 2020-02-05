@@ -6,7 +6,7 @@
 
     "manifest_version": 2,
 
-    "permissions": ["tabs", "activeTab", "https://twitter.com/"],
+    "permissions": ["storage", "tabs", "activeTab", "https://twitter.com/"],
     "icons": {
         "16": "icons/nort_16.png",
         "32": "icons/nort_32.png",
