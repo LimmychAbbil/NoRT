@@ -8,13 +8,7 @@ const ElementsEnum = Object.freeze(
 );
 Object.freeze(ElementsEnum);
 
-
-    //Creating Elements
-    var btn = document.createElement("BUTTON")
-    var t = document.createTextNode("CLICK ME");
-    btn.appendChild(t);
-    //Prepending to DOM 
-    document.body.prepend(btn);
+    var configHideRetweetsEnabled = true;
     var isBindingActive = false;
     addObserver();
 
@@ -41,10 +35,20 @@ function addObserver() {
     //
 
 function hideTweets() {
+    chrome.storage.sync.get(['confHideRTs'], function(result) {
+        configHideRetweetsEnabled = result.confHideRTs;
+    });
+    if (!configHideRetweetsEnabled) {
+        console.log("Config 'Hide RTs' not disabled. No actions will be done with twitter page");
+        return;
+    }
+
     var allElementsWithIcon = document.getElementsByTagName("g");
     
      for (const elementToHide of allElementsWithIcon) {
-            if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.retweet)
-        elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
+            if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.retweet) {
+                
+                elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
+            }
     }
 }
