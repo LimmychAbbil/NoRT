@@ -1,3 +1,11 @@
+chrome.storage.sync.get(['confHideRTs'], function(result) {
+    if (result.confHideRTs != null) {
+        document.getElementById("showRTs").checked = result.confHideRTs;
+    } else {
+        document.getElementById("showRTs").checked = true;
+    }
+    });
+
 document.getElementById("showRTs").addEventListener("click", handleClick);
 function handleClick() {
     chrome.storage.sync.set({ confHideRTs: document.getElementById("showRTs").checked });
