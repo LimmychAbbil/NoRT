@@ -9,11 +9,20 @@ const ElementsEnum = Object.freeze(
 Object.freeze(ElementsEnum);
 
     var configHideRetweetsEnabled = true;
+    var configHideRecommendEnabled = true;
+    var configHideRepliesEnabled = true;
+    var configHidePinnedEnabled = true;
     var isBindingActive = false;
     addObserver();
 
 
 function addObserver() {
+    readConfig();
+    if (!(configHideRetweetsEnabled && configHideRecommendEnabled && configHideRepliesEnabled && configHidePinnedEnabled)) {
+        console.log("Config is to show all tweets. No actions will be done with twitter page");
+        return;
+    }
+
     console.log("Adding observer");
     MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
     var observer = new MutationObserver(function(mutations, observer) {
@@ -32,21 +41,44 @@ function addObserver() {
             //...
     });
 }
-    //
 
-function hideTweets() {
+    function readConfig() {
     chrome.storage.sync.get(['confHideRTs'], function(result) {
         configHideRetweetsEnabled = result.confHideRTs;
     });
-    if (!configHideRetweetsEnabled) {
-        console.log("Config 'Hide RTs' not disabled. No actions will be done with twitter page");
-        return;
+    
+    chrome.storage.sync.get(['confHideRCs'], function(result) {
+        configHideRecommendEnabled = result.confHideRCs;
+    });
+    chrome.storage.sync.get(['confHideRPs'], function(result) {
+        configHideRepliesEnabled = result.confHideRPs;
+    });
+    chrome.storage.sync.get(['confHidePinned'], function(result) {
+        configHidePinnedEnabled = result.confHidePinned;
+    });
     }
+
+function hideTweets() {
 
     var allElementsWithIcon = document.getElementsByTagName("g");
     
      for (const elementToHide of allElementsWithIcon) {
-            if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.retweet) {
+            if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.retweet && configHideRetweetsEnabled) {
+                
+                elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
+            }
+
+            if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.recommend && configHideRecommendEnabled) {
+                
+                elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
+            }
+
+            if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.reply && configHideRepliesEnabled) {
+                
+                elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
+            }
+
+            if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.pinned && configHidePinnedEnabled) {
                 
                 elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
             }
