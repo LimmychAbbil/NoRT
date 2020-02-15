@@ -3,28 +3,45 @@
 <head>
     <link rel="stylesheet" type="text/css" href="controls/styles.css">
 </head>
-<div style="width:400px; display:inline">
-    Retweets:
-    <label class="switch">
-      <input type="checkbox" id="showRTs" checked>
-      <span class="slider round"></span>
-    </label><br>
-    Recommended:
-    <label class="switch">
-      <input type="checkbox" id="showRCs" checked>
-      <span class="slider round"></span>
-    </label><br>
-    Replies:
-    <label class="switch">
-      <input type="checkbox" id="showRPs" checked>
-      <span class="slider round"></span>
-    </label><br>
-    Pinned:
-    <label class="switch">
-      <input type="checkbox" id="showPinned" checked>
-      <span class="slider round"></span>
-    </label>
-    <script src="popup.js"></script>
+<div id="content" style="width:400px;">
+    <div id="settings" style="width:250px; display:block">
+        <div id="setting rts" class="setting">
+            <div class="labelText">Retweets:</div>
+            <div class="settingsTumbler">
+                <label class="switch">
+                    <input type="checkbox" id="showRTs" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div id="setting rcs" class="setting">
+            <div class="labelText">Recommended:</div>
+            <div class="settingsTumbler">
+                <label class="switch">
+                    <input type="checkbox" id="showRCs" checked>
+                <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div id="setting rps" class="setting">
+            <div class="labelText">Replies:</div>
+            <div class="settingsTumbler">
+                <label class="switch">
+                  <input type="checkbox" id="showRPs" checked>
+                  <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <div id="setting pinned" class="setting">
+            <div class="labelText">Pinned:</div>
+            <div class="settingsTumbler">
+                <label class="switch">
+                  <input type="checkbox" id="showPinned" checked>
+                  <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+        <script src="popup.js"></script>
 </div>
 </body>
 </html>
