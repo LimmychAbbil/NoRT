@@ -1,3 +1,5 @@
+//FIXME: doesn't work
+//import {reloadPage} from './controls/reloadPage';
 chrome.storage.sync.get(['confHideRTs'], function(result) {
     if (result.confHideRTs != null) {
         document.getElementById("showRTs").checked = result.confHideRTs;
@@ -52,9 +54,12 @@ function handleClickPinned() {
 }
 
 function reloadPage() {
-    //TODO ignore if not tw page opened
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.reload(tabs[0].id);
+        var activeTabURL = tabs[0].url;
+        var url = new URL(activeTabURL);
+        if (url.hostname === "twitter.com") {
+            chrome.tabs.reload(tabs[0].id);
+        }
     });
 }
 /*LISTENER FOR DEBUG PURPOSES:
