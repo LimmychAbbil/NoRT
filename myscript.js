@@ -43,19 +43,36 @@ function addObserver() {
 }
 
     function readConfig() {
-    chrome.storage.sync.get(['confHideRTs'], function(result) {
-        configHideRetweetsEnabled = result.confHideRTs;
-    });
-    
-    chrome.storage.sync.get(['confHideRCs'], function(result) {
-        configHideRecommendEnabled = result.confHideRCs;
-    });
-    chrome.storage.sync.get(['confHideRPs'], function(result) {
-        configHideRepliesEnabled = result.confHideRPs;
-    });
-    chrome.storage.sync.get(['confHidePinned'], function(result) {
-        configHidePinnedEnabled = result.confHidePinned;
-    });
+        //TODO check if I can unite gets
+        chrome.storage.sync.get(['confHideRTs'], function(result) {
+            if (result.confHideRTs != null) {
+                configHideRetweetsEnabled = result.confHideRTs;
+            } else {
+                configHideRetweetsEnabled = true;
+            }
+        });
+        
+        chrome.storage.sync.get(['confHideRCs'], function(result) {
+            if (result.confHideRCs != null) {
+                configHideRecommendEnabled = result.confHideRCs;
+            } else {
+                configHideRecommendEnabled = true;
+            }
+        });
+        chrome.storage.sync.get(['confHideRPs'], function(result) {
+            if (result.confHideRPs != null) {
+                configHideRepliesEnabled = result.confHideRPs;
+            } else {
+                configHideRepliesEnabled = true;
+            }
+        });
+        chrome.storage.sync.get(['confHidePinned'], function(result) {
+            if (result.confHidePinned != null) {
+                configHidePinnedEnabled = result.confHidePinned;
+            } else {
+                configHidePinnedEnabled = true;
+            }
+        });
     }
 
 function hideTweets() {
