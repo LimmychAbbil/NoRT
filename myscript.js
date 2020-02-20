@@ -44,7 +44,7 @@ function addObserver() {
 
     function readConfig() {
         //TODO check if I can unite gets
-        chrome.storage.sync.get(['confHideRTs'], function(result) {
+        chrome.storage.local.get(['confHideRTs'], function(result) {
             if (result.confHideRTs != null) {
                 configHideRetweetsEnabled = result.confHideRTs;
             } else {
@@ -52,21 +52,21 @@ function addObserver() {
             }
         });
         
-        chrome.storage.sync.get(['confHideRCs'], function(result) {
+        chrome.storage.local.get(['confHideRCs'], function(result) {
             if (result.confHideRCs != null) {
                 configHideRecommendEnabled = result.confHideRCs;
             } else {
                 configHideRecommendEnabled = true;
             }
         });
-        chrome.storage.sync.get(['confHideRPs'], function(result) {
+        chrome.storage.local.get(['confHideRPs'], function(result) {
             if (result.confHideRPs != null) {
                 configHideRepliesEnabled = result.confHideRPs;
             } else {
                 configHideRepliesEnabled = true;
             }
         });
-        chrome.storage.sync.get(['confHidePinned'], function(result) {
+        chrome.storage.local.get(['confHidePinned'], function(result) {
             if (result.confHidePinned != null) {
                 configHidePinnedEnabled = result.confHidePinned;
             } else {
@@ -83,21 +83,25 @@ function hideTweets() {
             if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.retweet && configHideRetweetsEnabled) {
                 
                 elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
+                console.log("test1");
             }
 
+            /* FIXME this icon appear in another place and the whole feed disabled. Should be active only on the news feed
             if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.recommend && configHideRecommendEnabled) {
                 
                 elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
-            }
+            }*/
 
             if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.reply && configHideRepliesEnabled) {
                 
                 elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
+                console.log("test3");
             }
 
             if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.pinned && configHidePinnedEnabled) {
                 
                 elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
+                console.log("test4");
             }
     }
 }

@@ -1,7 +1,6 @@
   {
     "name": "NoReTweets",
-    "version": "0.01.0004",
-    //"default_locale": "en",
+    "version": "0.01.0005",
     "description": "Read only own person's thoughts",
 
     "manifest_version": 2,
@@ -17,10 +16,6 @@
     "browser_action": {
       "default_popup": "popup.html"
     },
-    //"background": {
-    //  "scripts": ["background.js"],
-    //  "persistent": false
-    //}
     
     "content_scripts": [
     {

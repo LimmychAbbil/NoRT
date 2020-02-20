@@ -1,5 +1,47 @@
 //FIXME: doesn't work
 //import {reloadPage} from './controls/reloadPage';
+
+const showRTs = document.getElementById("showRTs");
+const showRCs = document.getElementById("showRCs");
+const showRPs = document.getElementById("showRPs");
+const showPinned = document.getElementById("showPinned");
+
+function loadConfig(key, element) {
+    chrome.storage.local.get([key], function(result) {
+        if (result[key] != null) {
+            element.checked = result[key];
+        } else {
+            element.checked = true;
+        }
+    });
+}
+
+function reloadPage() {
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        var activeTabURL = tabs[0].url;
+        var url = new URL(activeTabURL);
+        if (url.hostname === "twitter.com") {
+            chrome.tabs.reload(tabs[0].id);
+        }
+    });
+}
+
+function handleClick(key, element) {
+    chrome.storage.local.set({ [key]: element.checked });
+    reloadPage();
+}
+
+loadConfig('confHideRTs', showRTs);
+loadConfig('confHideRCs', showRCs);
+loadConfig('confHideRPs', showRPs);
+loadConfig('confHidePinned', showPinned);
+
+showRTs.addEventListener("click", function () {handleClick('confHideRTs', showRTs)});
+showRCs.addEventListener("click", function () {handleClick('confHideRCs', showRCs)});
+showRPs.addEventListener("click", function () {handleClick('confHideRPs', showRPs)});
+showPinned.addEventListener("click", function () {handleClick('confHidePinned', showPinned)});
+
+/*
 chrome.storage.sync.get(['confHideRTs'], function(result) {
     if (result.confHideRTs != null) {
         document.getElementById("showRTs").checked = result.confHideRTs;
@@ -31,37 +73,7 @@ chrome.storage.sync.get(['confHidePinned'], function(result) {
         document.getElementById("showPinned").checked = true;
     }
     });
-
-document.getElementById("showRTs").addEventListener("click", handleClickRTs);
-document.getElementById("showRCs").addEventListener("click", handleClickRCs);
-document.getElementById("showRPs").addEventListener("click", handleClickRPs);
-document.getElementById("showPinned").addEventListener("click", handleClickPinned);
-function handleClickRTs() {
-    chrome.storage.sync.set({ confHideRTs: document.getElementById("showRTs").checked });
-    reloadPage();
-}
-function handleClickRCs() {
-    chrome.storage.sync.set({ confHideRCs: document.getElementById("showRCs").checked });
-    reloadPage();
-}
-function handleClickRPs() {
-    chrome.storage.sync.set({ confHideRPs: document.getElementById("showRPs").checked });
-    reloadPage();
-}
-function handleClickPinned() {
-    chrome.storage.sync.set({ confHidePinned: document.getElementById("showPinned").checked });
-    reloadPage();
-}
-
-function reloadPage() {
-    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        var activeTabURL = tabs[0].url;
-        var url = new URL(activeTabURL);
-        if (url.hostname === "twitter.com") {
-            chrome.tabs.reload(tabs[0].id);
-        }
-    });
-}
+*/
 /*LISTENER FOR DEBUG PURPOSES:
 chrome.storage.onChanged.addListener(function(changes, namespace) {
         for (var key in changes) {
