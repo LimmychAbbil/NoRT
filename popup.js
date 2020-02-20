@@ -13,8 +13,6 @@ function loadConfig(key, element) {
         } else {
             element.checked = true;
         }
-        
-        document.body.append(key + " " + result[key]);
     });
 }
 
@@ -29,7 +27,7 @@ function reloadPage() {
 }
 
 function handleClick(key, element) {
-    chrome.storage.local.set({ key: element.checked });
+    chrome.storage.local.set({ [key]: element.checked });
     reloadPage();
 }
 
