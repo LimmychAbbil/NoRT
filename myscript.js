@@ -8,17 +8,19 @@ const ElementsEnum = Object.freeze(
 );
 Object.freeze(ElementsEnum);
 
-    var configHideRetweetsEnabled = true;
-    var configHideRecommendEnabled = true;
-    var configHideRepliesEnabled = true;
-    var configHidePinnedEnabled = true;
+    chrome.configHideRetweetsEnabled = true;
+    chrome.configHideRecommendEnabled = true;
+    chrome.configHideRepliesEnabled = true;
+    chrome.configHidePinnedEnabled = true;
     var isBindingActive = false;
     addObserver();
 
 
 function addObserver() {
-    readConfig();
-    if (!(configHideRetweetsEnabled && configHideRecommendEnabled && configHideRepliesEnabled && configHidePinnedEnabled)) {
+    readConfig('confHideRTs', 'configHideRetweetsEnabled');
+    readConfig('confHideRPs', 'configHideRepliesEnabled');
+    readConfig('confHidePinned', 'configHidePinnedEnabled');
+    if (!(chrome.configHideRetweetsEnabled && chrome.configHideRecommendEnabled && chrome.configHideRepliesEnabled && chrome.configHidePinnedEnabled)) {
         console.log("Config is to show all tweets. No actions will be done with twitter page");
         return;
     }
@@ -42,35 +44,13 @@ function addObserver() {
     });
 }
 
-    function readConfig() {
+    function readConfig(key, flagName) {
         //TODO check if I can unite gets
-        chrome.storage.local.get(['confHideRTs'], function(result) {
-            if (result.confHideRTs != null) {
-                configHideRetweetsEnabled = result.confHideRTs;
+        chrome.storage.local.get([key], function(result) {
+            if (result[key] != null) {
+                chrome[flagName] = result[key];
             } else {
-                configHideRetweetsEnabled = true;
-            }
-        });
-        
-        chrome.storage.local.get(['confHideRCs'], function(result) {
-            if (result.confHideRCs != null) {
-                configHideRecommendEnabled = result.confHideRCs;
-            } else {
-                configHideRecommendEnabled = true;
-            }
-        });
-        chrome.storage.local.get(['confHideRPs'], function(result) {
-            if (result.confHideRPs != null) {
-                configHideRepliesEnabled = result.confHideRPs;
-            } else {
-                configHideRepliesEnabled = true;
-            }
-        });
-        chrome.storage.local.get(['confHidePinned'], function(result) {
-            if (result.confHidePinned != null) {
-                configHidePinnedEnabled = result.confHidePinned;
-            } else {
-                configHidePinnedEnabled = true;
+                chrome[flagName] = true;
             }
         });
     }
@@ -80,28 +60,16 @@ function hideTweets() {
     var allElementsWithIcon = document.getElementsByTagName("g");
     
      for (const elementToHide of allElementsWithIcon) {
-            if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.retweet && configHideRetweetsEnabled) {
-                
-                elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
-                console.log("test1");
-            }
+            checkAndHideElement(elementToHide, ElementsEnum.retweet, chrome.configHideRetweetsEnabled);
+            //FIXME this icon appear in another place and the whole feed disabled. Should be active only on the news feed
+            //checkAndHideElement(elementToHide, ElementsEnum.recommend, configHideRecommendEnabled);
+            checkAndHideElement(elementToHide, ElementsEnum.reply, chrome.configHideRepliesEnabled);
+            checkAndHideElement(elementToHide, ElementsEnum.pinned, chrome.configHidePinnedEnabled);
+    }
+}
 
-            /* FIXME this icon appear in another place and the whole feed disabled. Should be active only on the news feed
-            if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.recommend && configHideRecommendEnabled) {
-                
-                elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
-            }*/
-
-            if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.reply && configHideRepliesEnabled) {
-                
-                elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
-                console.log("test3");
-            }
-
-            if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === ElementsEnum.pinned && configHidePinnedEnabled) {
-                
-                elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
-                console.log("test4");
-            }
+function checkAndHideElement(elementToHide, elementType, flag) {
+    if (elementToHide.firstElementChild != null && elementToHide.firstElementChild.getAttribute("d") === elementType && flag) {
+        elementToHide.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.parentElement.setAttribute("style", "display:none");
     }
 }
