@@ -17,9 +17,9 @@ Object.freeze(ElementsEnum);
 
 
 function addObserver() {
-    readConfig('confHideRTs', 'configHideRetweetsEnabled');
-    readConfig('confHideRPs', 'configHideRepliesEnabled');
-    readConfig('confHidePinned', 'configHidePinnedEnabled');
+    readConfig('confHideRTs', 'configHideRetweetsEnabled', true);
+    readConfig('confHideRPs', 'configHideRepliesEnabled', false);
+    readConfig('confHidePinned', 'configHidePinnedEnabled', false);
     if (!(chrome.configHideRetweetsEnabled && chrome.configHideRecommendEnabled && chrome.configHideRepliesEnabled && chrome.configHidePinnedEnabled)) {
         console.log("Config is to show all tweets. No actions will be done with twitter page");
         return;
@@ -44,13 +44,13 @@ function addObserver() {
     });
 }
 
-    function readConfig(key, flagName) {
+    function readConfig(key, flagName, defaultValue) {
         //TODO check if I can unite gets
         chrome.storage.local.get([key], function(result) {
             if (result[key] != null) {
                 chrome[flagName] = result[key];
             } else {
-                chrome[flagName] = true;
+                chrome[flagName] = defaultValue;
             }
         });
     }

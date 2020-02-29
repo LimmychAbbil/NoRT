@@ -6,12 +6,12 @@ const showRCs = document.getElementById("showRCs");
 const showRPs = document.getElementById("showRPs");
 const showPinned = document.getElementById("showPinned");
 
-function loadConfig(key, element) {
+function loadConfig(key, element, defaultValue) {
     chrome.storage.local.get([key], function(result) {
         if (result[key] != null) {
             element.checked = result[key];
         } else {
-            element.checked = true;
+            element.checked = defaultValue;
         }
     });
 }
@@ -21,10 +21,10 @@ function handleClick(key, element) {
     reloadPage();
 }
 
-loadConfig('confHideRTs', showRTs);
+loadConfig('confHideRTs', showRTs, true);
 //loadConfig('confHideRCs', showRCs);
-loadConfig('confHideRPs', showRPs);
-loadConfig('confHidePinned', showPinned);
+loadConfig('confHideRPs', showRPs, false);
+loadConfig('confHidePinned', showPinned, false);
 
 showRTs.addEventListener("click", function () {handleClick('confHideRTs', showRTs)});
 showRCs.addEventListener("click", function () {handleClick('confHideRCs', showRCs)});

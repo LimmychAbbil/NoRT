@@ -14,35 +14,44 @@
                 </label>
             </div>
         </div>
-        <div id="setting rcs" class="setting">
-            <div class="labelText">Recommended:</div>
-            <div class="settingsTumbler">
-                <label class="switch">
-                    <input type="checkbox" id="showRCs" disabled>
-                <span class="slider round"></span>
-                </label>
+        <details>
+            <summary style="text-color: #696969;">Advanced settings</summary>
+            <div id="setting rcs" class="setting">
+                <div class="labelText">Recommended:</div>
+                <div class="settingsTumbler">
+                    <label class="switch">
+                        <input type="checkbox" id="showRCs" disabled>
+                    <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
-        </div>
-        <div id="setting rps" class="setting">
-            <div class="labelText">Replies:</div>
-            <div class="settingsTumbler">
-                <label class="switch">
-                  <input type="checkbox" id="showRPs" checked>
-                  <span class="slider round"></span>
-                </label>
+            <div id="setting rps" class="setting">
+                <div class="labelText">Replies:</div>
+                <div class="settingsTumbler">
+                    <label class="switch">
+                      <input type="checkbox" id="showRPs">
+                      <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
-        </div>
-        <div id="setting pinned" class="setting">
-            <div class="labelText">Pinned:</div>
-            <div class="settingsTumbler">
-                <label class="switch">
-                  <input type="checkbox" id="showPinned" checked>
-                  <span class="slider round"></span>
-                </label>
+            <div id="setting pinned" class="setting">
+                <div class="labelText">Pinned:</div>
+                <div class="settingsTumbler">
+                    <label class="switch">
+                      <input type="checkbox" id="showPinned">
+                      <span class="slider round"></span>
+                    </label>
+                </div>
             </div>
-        </div>
+        </details>
         <script src="controls/reloadPage.js"></script>
         <script src="popup.js"></script>
+</div>
+<div class="footer" id="footer">
+    <div class="hotlink">Donate</div>
+    <div class="hotlink">Contribute</div>
+    <br>
+    <div class="hotlink">About</div>
 </div>
 </body>
 </html>

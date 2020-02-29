@@ -45,6 +45,21 @@ body {
   transition: .4s;
 }
 
+#footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    color: darkgrey;
+    text-align: center;
+}
+
+.hotlink {
+    display:inline-block;
+    padding-top:5px;
+    padding-right:10px;
+}
+
 input:checked + .slider {
   background-color: #2196F3;
 }
