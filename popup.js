@@ -1,10 +1,14 @@
-//FIXME: doesn't work
-//import {reloadPage} from './controls/reloadPage';
+function openTab(location) {
+    chrome.tabs.create({active: true, url: location});
+}
 
 const showRTs = document.getElementById("showRTs");
 const showRCs = document.getElementById("showRCs");
 const showRPs = document.getElementById("showRPs");
 const showPinned = document.getElementById("showPinned");
+
+const donateButton = document.getElementById("visitDonate");
+const contributeButton = document.getElementById("visitContribute");
 
 function loadConfig(key, element, defaultValue) {
     chrome.storage.local.get([key], function(result) {
@@ -30,6 +34,11 @@ showRTs.addEventListener("click", function () {handleClick('confHideRTs', showRT
 showRCs.addEventListener("click", function () {handleClick('confHideRCs', showRCs)});
 showRPs.addEventListener("click", function () {handleClick('confHideRPs', showRPs)});
 showPinned.addEventListener("click", function () {handleClick('confHidePinned', showPinned)});
+
+donateButton.addEventListener("click", function () {openTab('https://limmychabbil.github.io/NoRT/donate.html')});
+contributeButton.addEventListener("click", function () {openTab('https://github.com/LimmychAbbil/NoRT/')});
+
+
 
 
 /*LISTENER FOR DEBUG PURPOSES:
