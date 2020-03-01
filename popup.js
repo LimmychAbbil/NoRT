@@ -35,7 +35,7 @@ showRCs.addEventListener("click", function () {handleClick('confHideRCs', showRC
 showRPs.addEventListener("click", function () {handleClick('confHideRPs', showRPs)});
 showPinned.addEventListener("click", function () {handleClick('confHidePinned', showPinned)});
 
-donateButton.addEventListener("click", function () {openTab('https://limmychabbil.github.io/NoRT/donate.html')});
+donateButton.addEventListener("click", function () {openTab('https://limmychabbil.github.io/NoRT/donate')});
 contributeButton.addEventListener("click", function () {openTab('https://github.com/LimmychAbbil/NoRT/')});
 
 
