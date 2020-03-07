@@ -2,7 +2,7 @@
 title: Donate
 ---
 
-### Current funds
+### Help the project
 
 Donations of money can be sent through: 
 
@@ -10,8 +10,7 @@ Donations of money can be sent through:
 
 
 <link rel="stylesheet" type="text/css" href="controls/styles.css">
-<div style="text-align:center">
+
 <div class="hotlink"><a id="visitContribute" href="https://github.com/LimmychAbbil/NoRT/">Contribute</a></div>
 <br>
 <div class="hotlink">About</div>
-</div>
