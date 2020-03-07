@@ -40,7 +40,7 @@ showRPs.addEventListener("click", function () {handleClick('confHideRPs', showRP
 showPinned.addEventListener("click", function () {handleClick('confHidePinned', showPinned)});
 autoReload.addEventListener("click", function () {chrome.storage.local.set({ confAutoReload: autoReload.checked })});
 
-donateButton.addEventListener("click", function () {openTab('https://limmychabbil.github.io/NoRT/donate')});
+donateButton.addEventListener("click", function () {openTab('https://limmychabbil.github.io/NoRT/pages/donate')});
 contributeButton.addEventListener("click", function () {openTab('https://github.com/LimmychAbbil/NoRT/')});
 
 
