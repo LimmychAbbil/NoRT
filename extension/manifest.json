@@ -1,7 +1,8 @@
   {
-    "name": "NoReTweets",
-    "version": "0.01.0010",
-    "description": "Read only own person's thoughts",
+    "name": "__MSG_appName__",
+    "version": "0.01.0011",
+    "description": "__MSG_appDesc__",
+    "default_locale": "en",
 
     "manifest_version": 2,
 

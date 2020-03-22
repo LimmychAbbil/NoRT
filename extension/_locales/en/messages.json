@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "NoReTweets",
+    "description": "The title of the application, displayed in the web store."
+  },
+  "appDesc": {
+    "message": "Read only own person's thoughts", 
+    "description":"The description of the application, displayed in the web store."
+  }
+}
